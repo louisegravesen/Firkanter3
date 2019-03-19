@@ -1,3 +1,1 @@
-say hey
-draw_line
-draw_line
+tegn en streg spillet
