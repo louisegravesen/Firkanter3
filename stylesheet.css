@@ -38,3 +38,11 @@ header h1 {
   text-align: center;
   font-size: 4em;
 }
+
+
+#start {
+  height: 90px;
+  width: 520px;
+  background-color: rgba(200,0,0);
+
+}
