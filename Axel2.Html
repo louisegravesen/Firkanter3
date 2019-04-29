@@ -1,0 +1,94 @@
+<body>
+            <div id="page"><div id="pageinner">
+            <img id="dandblogo" src="graphics/svg/dandblogo4.svg" alt="Dots & Lines">
+            <br>
+            <header id="dAndBHeader">
+            	<span id="player2Score" style="color: blue;">Spiller1: 0</span>
+            	<span id="player1Score" style="color: red;">Spiller2: 0</span>
+				<div>
+            	<img src="graphics/svg/iconmonstr-gear-10-icon.svg" alt="indstillinger" id="settingsButton" data-screenname="settingsForm" title="Vis idnstilllinger">
+            	<img src="graphics/svg/iconmonstr-refresh-icon.svg" alt="Nyt Spil" id="newGameShortCutButton" title="Start nyt spil">
+            	<img src="graphics/svg/iconmonstr-trophy-7-icon.svg" alt="Rekord" id="Rekord" data-screenname="Rekord" title="Show Rekord">
+            	</div>
+            </header>
+            <form id="settingsForm" style="display: none;">
+                <fieldset>
+            	<label for="numDotsX">Width:</label><input type="range" id="numDotsX" min="2" max="10" value="4" onchange="manager.newGame('numdotschange')">
+            	<label for="numDotsY">Height: </label><input type="range" id="numDotsY" min="2" max="10" value="4" onchange="manager.newGame('numdotschange')">
+               	<img src="graphics/svg/iconmonstr-x-mark-icon.svg" alt="Close Settings" id="closeSettingsButton" data-screenname="settingsButton">
+            	</fieldset>
+
+            	<fieldset>
+            		<div id="player1Controls">
+            			<label for="player1Name">Player 1 Name:</label>
+            			<input type="text" id="player1Name" value="Spiller1" onchange="manager.newGame()" maxlength="45">
+                  <input type="text" id="player2Name" value="Spiller2" onchange="manager.newgame()" maxlength="45">
+            			<label for="player2Name">player 2 name:</label>
+            			<input id="player2Name" type="checkbox" value="player2Name">
+            			<label for="player1PlaysFirst"></label>
+            			<input id="player1PlaysFirst" name="whoPlaysFirst" type="radio" checked="" onchange="manager.newGame()">
+            		</div>
+
+            		<div id="player2Controls">
+            			<label for="player2Name">Player 2 Name:</label>
+            			<input type="text" id="player2Name" value="Me" onchange="manager.newGame()" maxlength="45">
+            			<label for="player2Name">player 2 name:</label>
+            			<input id="player2Name" type="checkbox" value="player2Name" checked="" onchange="manager.newGame()">
+            			<label for="player2PlaysFirst"></label>
+            			<input id="player2PlaysFirst" name="whoPlaysFirst" type="radio" onchange="manager.newGame()">
+            		</div>
+            	</fieldset>
+
+            	<fieldset>
+            		<label for="freeTurns">CtrClick/CtrAltClick give a free turn?</label>
+            	    <input type="checkbox" id="freeTurns">
+            		<input type="button" value="Show hint" onclick="manager.showHint()" id="showHintButton">
+            		<input type="button" value="Take Back" onclick="manager.takeBack()" id="takeBackMoveButton">
+            	</fieldset>
+            	<fieldset>
+            		<label for="showInternals">Show game internals: </label><input type="checkbox" value="showInternals" id="showInternals">
+            		<table id="internalStats" style="display:none">
+            			<tbody>
+            			<tr><td>Score:</td><td id="bestScore"></td></tr>
+            			<tr><td>Depth:</td><td id="searchDepthAchieved"></td></tr>
+            			<tr><td>Number Of Nodes:</td><td id="numNodesVisited"></td></tr>
+            			<tr><td>Number Of Leaves:</td><td id="numLeavesVisited"></td></tr>
+            			<tr><td>Microseconds Per Node:</td><td id="microsPerNode"></td></tr>
+            			</tbody>
+            		</table>
+            	</fieldset>
+	            <fieldset>
+	   				<input type="text" id="gameCode" placeholder="Game code" onclick="this.select()">
+	            	<input id="loadGame" type="button" value="Load Game" onclick="manager.loadGame()">
+	            </fieldset>
+	            <fieldset>
+	            	<input id="playNow" type="button" value="Play Now" onclick="manager.playNow()" disabled="">
+	            </fieldset>
+	            <fieldset>
+	            	<label for="showAnimations" id="showAnimationsLabel">Show animations (not supported on Internet Explorer):</label>
+	            	<input type="checkbox" id="showAnimations" checked="">
+	            </fieldset>
+            </form>
+            <aside id="helpScreen" style="display: none;">
+            	<img src="graphics/svg/iconmonstr-x-mark-icon.svg" alt="Close Help" id="closeHelpButton" data-screenname="helpButton">
+    				</aside>
+
+
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svgCanvas" viewBox="0 0 500 500" preserveAspectRatio="xMidYMin">
+            	<!-- 100% invisible rect needed for firefox as width/height in firefox is dependent on the contents -->
+            	<rect x="0" y="0" width="100%" height="100%" opacity="0"></rect>
+            <line stroke="rgb(0,0,0)" stroke-width="4" visibility="hidden" visible="hidden" stroke-dasharray="14.285714285714286 14.285714285714286" x1="464.2857142857143" y1="178.57142857142858" x2="464.2857142857143" y2="35.714285714285715"></line><circle cx="35.714285714285715" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="35.714285714285715" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="9" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="35.714285714285715" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="9" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="35.714285714285715" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.111106872558594" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.061728000640869" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.277082920074463" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.138506889343262" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.111106872558594" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.061728000640869" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.277082920074463" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.333320140838623" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.999959945678711" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.166626930236816" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.212924003601074" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.44438648223877" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.44438648223877" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.475253105163574" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.111106872558594" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.475253105163574" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.475253105163574" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.504404067993164" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle></svg>
+           	<footer>
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" id="progressBox" preserveAspectRatio="none" style="opacity: 0.2;">
+
+      </footer>
+
+     	<div id="scripts">
+
+     		<script src="js/vectors.js"></script>
+            <script src="js/graphics.js"></script>
+   			<script src="js/manager.js"></script>
+   			<script type="text/javascript">manager.newGame();</script>
+
+   	</div id="scripts">
+        </body>

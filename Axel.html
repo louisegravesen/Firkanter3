@@ -1,0 +1,308 @@
+<body>
+            <div id="page"><div id="pageinner">
+            <img id="dandblogo" src="graphics/svg/dandblogo4.svg" alt="Dots &amp; Boxes">
+            <br>
+            <header id="dAndBHeader">
+            	<span id="player2Score" style="color: blue;">Me: 0</span>
+            	<span id="player1Score" style="color: red;">You: 0</span>
+				<div>
+            	<img src="graphics/svg/iconmonstr-gear-10-icon.svg" alt="Settings" id="settingsButton" data-screenname="settingsForm" title="Show settings menu">
+            	<img src="graphics/svg/iconmonstr-refresh-icon.svg" alt="New Game" id="newGameShortCutButton" title="Start new game">
+            	<img src="graphics/svg/iconmonstr-help-icon.svg" alt="Help" id="helpButton" data-screenname="helpScreen" title="Show help screen">
+            	<img src="graphics/svg/iconmonstr-trophy-7-icon.svg" alt="High Scores" id="highScoresButton" data-screenname="highScores" title="Show High Scores">
+            	</div>
+            </header>
+            <form id="settingsForm" style="display: none;">
+                <fieldset>
+            	<label for="numDotsX">Width:</label><input type="range" id="numDotsX" min="2" max="10" value="4" onchange="manager.newGame('numdotschange')">
+            	<label for="numDotsY">Height: </label><input type="range" id="numDotsY" min="2" max="10" value="4" onchange="manager.newGame('numdotschange')">
+               	<img src="graphics/svg/iconmonstr-x-mark-icon.svg" alt="Close Settings" id="closeSettingsButton" data-screenname="settingsButton">
+            	</fieldset>
+            	<fieldset>
+            		<div id="player1Controls">
+            			<label for="player1Name">Player 1 Name:</label>
+            			<input type="text" id="player1Name" value="You" onchange="manager.newGame()" maxlength="45">
+            			<label for="player1IsComputer">Computer?</label>
+            			<input id="player1IsComputer" type="checkbox" value="player1IsComputer">
+            			<label for="player1PlaysFirst">Plays first?</label>
+            			<input id="player1PlaysFirst" name="whoPlaysFirst" type="radio" checked="" onchange="manager.newGame()">
+            		</div>
+            		<div id="player2Controls">
+            			<label for="player2Name">Player 2 Name:</label>
+            			<input type="text" id="player2Name" value="Me" onchange="manager.newGame()" maxlength="45">
+            			<label for="player2IsComputer">Computer?</label>
+            			<input id="player2IsComputer" type="checkbox" value="player2IsComputer" checked="" onchange="manager.newGame()">
+            			<label for="player2PlaysFirst">Plays first?</label>
+            			<input id="player2PlaysFirst" name="whoPlaysFirst" type="radio" onchange="manager.newGame()">
+            		</div>
+            	</fieldset>
+            	<fieldset>
+            		<label for="freeTurns">CtrClick/CtrAltClick give a free turn?</label>
+            	    <input type="checkbox" id="freeTurns">
+            		<input type="button" value="Show hint" onclick="manager.showHint()" id="showHintButton">
+            		<input type="button" value="Take Back" onclick="manager.takeBack()" id="takeBackMoveButton">
+            	</fieldset>
+            	<fieldset>
+            		<label for="showInternals">Show game internals: </label><input type="checkbox" value="showInternals" id="showInternals">
+            		<table id="internalStats" style="display:none">
+            			<tbody>
+            			<tr><td>Score:</td><td id="bestScore"></td></tr>
+            			<tr><td>Depth:</td><td id="searchDepthAchieved"></td></tr>
+            			<tr><td>Number Of Nodes:</td><td id="numNodesVisited"></td></tr>
+            			<tr><td>Number Of Leaves:</td><td id="numLeavesVisited"></td></tr>
+            			<tr><td>Microseconds Per Node:</td><td id="microsPerNode"></td></tr>
+            			</tbody>
+            		</table>
+            	</fieldset>
+	            <fieldset>
+	   				<input type="text" id="gameCode" placeholder="Game code" onclick="this.select()">
+	            	<input id="loadGame" type="button" value="Load Game" onclick="manager.loadGame()">
+	            </fieldset>
+	            <fieldset>
+	            	<label for="thinkTime">Thinking Time:</label><input type="number" id="thinkTime" min="0" max="600" value="0.5" step="0.5">seconds
+	            	<progress id="progressBar" value="0" max="500"></progress>
+	            	<input id="playNow" type="button" value="Play Now" onclick="manager.playNow()" disabled="">
+	            </fieldset>
+	            <fieldset>
+	            	<label for="showAnimations" id="showAnimationsLabel">Show animations (not supported on Internet Explorer):</label>
+	            	<input type="checkbox" id="showAnimations" checked="">
+	            </fieldset>
+            </form>
+            <aside id="helpScreen" style="display: none;">
+            	<img src="graphics/svg/iconmonstr-x-mark-icon.svg" alt="Close Help" id="closeHelpButton" data-screenname="helpButton">
+            	<h2>How To Play</h2>
+            	<p>
+            	This is a computerised version of the old classic which lets you play the game online. The aim is complete more boxes than your opponent.
+            	You and your opponent take it in turns to join up two adjacent dots with a line.
+    			If any player fills a box they must make another move.
+    			You can play 1 or 2 player. But watch out, the computer strategy is driven by a reasonably intelligent algorithm!
+    			</p>
+    			<h2>Spread the word / Feedback</h2>
+    			<aside id="socialHelp">
+    			<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="https://platform.twitter.com/widgets/tweet_button.2e9f365dae390394eb8d923cba8c5b11.en.html#dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=http%3A%2F%2Fdotsandboxes.org%2F&amp;size=m&amp;text=Dots%20And%20Boxes&amp;time=1553001295240&amp;type=share&amp;url=http%3A%2F%2Fdotsandboxes.org" data-url="http://dotsandboxes.org" style="position: static; visibility: visible; width: 61px; height: 20px;"></iframe>
+				<br>
+				<div id="___plusone_0" style="position: absolute; width: 450px; left: -10000px;"><iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position:absolute;top:-10000px;width:450px;margin:0px;border-style:none" tabindex="0" vspace="0" width="100%" id="I0_1553001294901" name="I0_1553001294901" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;origin=http%3A%2F%2Fdotsandboxes.org&amp;url=http%3A%2F%2Fdotsandboxes.org%2F&amp;gsrc=3p&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.da.JJebDqvkik4.O%2Fam%3DwQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCOhPR8-zYWmW-hcuR0U6ZACgS99Mg%2Fm%3D__features__#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&amp;id=I0_1553001294901&amp;_gfid=I0_1553001294901&amp;parent=http%3A%2F%2Fdotsandboxes.org&amp;pfname=&amp;rpctoken=24257160" data-gapiattached="true"></iframe></div><div class="g-plusone" data-href="http://dotsandboxes.org" data-gapiscan="true" data-onload="true" data-gapistub="true"></div>
+				<br>
+				<div class="fb-like fb_iframe_widget" data-href="http://dotsandboxes.org" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=568165249963976&amp;container_width=0&amp;href=http%3A%2F%2Fdotsandboxes.org%2F&amp;layout=button_count&amp;locale=en_GB&amp;sdk=joey&amp;share=true&amp;show_faces=true"><span style="vertical-align: bottom; width: 119px; height: 20px;"><iframe name="f2539443e17d4a4" width="1000px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" title="fb:like Facebook Social Plugin" src="https://www.facebook.com/plugins/like.php?action=like&amp;app_id=568165249963976&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2Fd_vbiawPdxB.js%3Fversion%3D44%23cb%3Df149d305664a9bc%26domain%3Ddotsandboxes.org%26origin%3Dhttp%253A%252F%252Fdotsandboxes.org%252Ff2c305605398668%26relation%3Dparent.parent&amp;container_width=0&amp;href=http%3A%2F%2Fdotsandboxes.org%2F&amp;layout=button_count&amp;locale=en_GB&amp;sdk=joey&amp;share=true&amp;show_faces=true" class="" style="border: none; visibility: visible; width: 119px; height: 20px;"></iframe></span></div>
+    			</aside>
+    			<p>
+    			I wrote this website for fun. If you like it, do me a favour and help spread the word about it with the buttons to the left.
+    			I'm always looking for feedback so if you have anything to say, you can leave a message on my <a href="http://www.ossiemanners.co.uk/guestboook.php">personal website</a>.
+    			Or <a href="https://twitter.com/intent/tweet?screen_name=dotsandboxes">tweet me at @dotsandboxes</a>. You might also like my other html5 project <a href="http://www.crosswordex.com">crosswordex</a>
+    			where you can compile your own crossword in under a minute and challenge your friends.
+    			</p>
+    			<h2>Expert Play</h2>
+    			<p>
+   				One simple strategy you should be aware of is the double crossing move.
+   				Take all the boxes in a long chain except the last two.
+   				Let the opponent take these and she must give you more boxes with her extra move.
+    			But the theory behind the game is actually quite complex and is all about trying to get control of the board.
+    			To get into the details read the resources at the bottom of this page.
+    			</p>
+    			<h2>How my engine works</h2>
+            	<h3>Graphics</h3>
+            	<p>
+            	I am using SVG with pure JavaScript. New elements are drawn by manually appending elements to the svg placeholder. Elements are given <code>animinate</code>
+            	sub-elements if animations are supported by the browser. There is some minor housekeeping to make sure that the animations happen in sync and are queued correctly.
+            	</p>
+            	<p>
+            	In order to keep the browser responsive, the main cpu intensive tree-searching (see below) is done in a separate web-worker thread which reports back to the main
+            	JavaScript thread every time it completes a further level of depth. When the time is up (or the user forces a move) the best move so far is chosen.
+            	</p>
+				<h3>Gameplay</h3>
+				<p>
+				The game of dots and boxes has been shown (in <a href="#demainhern">sketch-proof</a> at least) to be np-hard which means the algorithm
+    			to solve an <var>n</var> × <var>n</var> board is exponential in <var>n</var>.
+    			However the game has a rich structure and you can massively outperform the naïve solving algorithm
+    			by taking advantage of symmetries and mathematical analysis of the game.
+				</p>
+				<p>
+				I use a modification of the <em>half-edge</em> data structure to represent the board. Each edge of each box is called a <em>half-edge</em>
+				allowing double counting; thus an edge between two neighbouring boxes will be represented by two <em>half-edge</em>s - one for each box that it is part of.
+				So the total number of <em>half-edges</em> is  <var>N = Width × Height × 4</var> and each <em>half-edge</em> is assigned an index ranging from
+				0 to <var>N − 1</var>.
+				</p>
+				<p>
+				First, I maintain two arrays of size <var>N</var>:
+				</p>
+				<dl>
+					<dt>Other half-edge</dt>
+					<dd>Defines the index of the other side of the half-edge. Or − 1 if there is no other half (ie. this edge is on the boundary so is a border for only one box)</dd>
+					<dt>Next half-edge</dt>
+					<dd>The index of the next half-edge for the box that is this half-edge is associated with.
+					By “next” we could just give the one that is anticlockwise. In fact the ordering doesn't matter, so long as the sequence of next half-edges goes in a loop
+					and cover all 4 edges of this box
+					</dd>
+				</dl>
+				<p>
+				When considering which move to take I initially look to see if there are any of the following free moves I
+				can take. If there are, I take one and do not bother searching the rest of the game tree.
+				</p>
+				<ul>
+					<li>If there is a broken chain of length not equal to 3 I will eat a square from it</li>
+					<li>If there is a broken loop of length greater than 4 I will eat a square from it</li>
+					<li>If there is a broken chain and a broken loop then I will eat a square from the broken loop</li>
+					<li>If there are 2 or more broken loops then I will eat a square from one of them</li>
+					<li>If there are 2 or more broken chains then I will eat a square from one of them</li>
+				</ul>
+				<p>
+				After doing this the game will be in one of three states
+				</p><ol>
+					<li>There are no boxes with only 1 edge left</li>
+					<li>There is one box with only 1 edge left which is part of a chain of length 3</li>
+					<li>There is one box with only 1 edge left which is part of a loop with 4 boxes remaining</li>
+				</ol>
+				<p>
+				Once this is done I simplify the game structure somewhat. In the <em>half-edge</em> data structure I only include boxes that have 3 or more edges left.
+				Any boxes of valence 2 will be collapsed. Any any boxes of valence 1 will be represented by a flag indicating which of the three
+				states above the game is in.
+				So the final data structure consists of
+				</p>
+				<dl>
+					<dt>Other half-edge</dt>
+					<dd>As above</dd>
+					<dt>Next half-edge</dt>
+					<dd>As above</dd><dd>
+					</dd><dt>Chain lengths</dt>
+					<dd>Array of size <var>N</var> representing the number of boxes of valence 2 that have been collapsed between this <em>half-edge</em> and its
+					other <em>half-edge</em></dd>
+					<dt>Independents</dt>
+					<dd>Array of independent chains and loops. The value in the array indicates the size</dd>
+					<dt>Independents Are Loops</dt>
+					<dd>Boolean flag indicating if the Independents are loops or chains</dd>
+					<dt>Looney Value</dt>
+					<dd>Value of 0, 2 or 4 indicating the which of the 3 states above the game is in</dd>
+					<dt>Who To Play Next</dt>
+					<dd>Boolean indicating who will be playing next</dd>
+					<dt>Score so far</dt>
+					<dd>Number of boxes the player to play next already has − number of boxes the other player has</dd>
+				</dl>
+
+				<p>
+				I then perform a depth-first mega-max search of the game tree with alpha-beta pruning.
+				The end evaluate function consists of counting the number of boxes by which one person leads.
+				If the previous move was looney (ie. <em>Looney Value</em> above is 2 or 4) then it is known that
+				the next player to move can capture at least half the remaining squares. So I simply assign 3/4 to that player.
+				</p>
+
+				<h3>Future Improvements</h3>
+				<ul>
+					<li>Usng a simple hash-table to cache game values and avoid recomputing is the lowest hanging fruit in terms of performance</li>
+					<li>When using the hash-table above I should take care to identify games that are equivalent but have different representations in my structure (eg. a permutation of half-edges).
+					Determining if two planar graphs are isomorphic is a linear time problem in theory (though I know of no such actual algorithm actually written) so it should be tractable to do so.
+					I have seen a <var>n<sup>2</sup></var> algorithm in the references <a href="#planargraphiso">here</a>.
+					</li>
+					<li>In the evaluate and megamax, I should also keep track of known maximum and minimum scores (ie. after looney moves) as well as the average score which is what it currently returns</li>
+					<li>Nimstring analysis</li>
+					<li>Improve move ordering (eg. search sacrifice moves last)</li>
+					<li>Search tree with several webworkers in parallel</li>
+					<li>etc. etc.</li>
+				</ul>
+
+				<h2>Other dots and boxes games</h2>
+				Let me know if you have developed a version and I'll include it here
+				<dl>
+					<dt><a href="http://www.dianneandpaul.net/PRsBoxes/">PRBoxes</a></dt>
+					<dd>Very Strong opponent. Uses full nimstring analysis etc. This is the best computer program for the game I have found</dd>
+					<dt><a href="http://mysite.verizon.net/vze16nctz/DotsBoxes/db.html">Knox</a></dt>
+					<dd>Very strong algorithm that goes even further than nimstring analysis applying some techniques in the middle game. I haven't been able to get it
+					to run and test it out yet though...</dd>
+					<dt><a href="http://www.mathstat.dal.ca/~jpg/dabble/">Dabble</a></dt>
+					<dd>Strong open source written in C with a nice GUI runnable in windows</dd>
+					<dt><a href="http://www.ossiemanners.co.uk/games">Ossie's Dots and Boxes</a></dt>
+					<dd>A version of the game I wrote in Visual Basic a while ago. Does not do anything particularly smart</dd>
+					<dt><a href="http://www.math.ucla.edu/~tom/Games/dots&amp;boxes.html">Web Dots and Boxes</a></dt>
+					<dd>Pretty weak but online version of the game</dd>
+				</dl>
+    			<h2>Resources</h2>
+    				<ul>
+    				<li><a href="http://en.wikipedia.org/wiki/Dots_and_Boxes">Wikipedia article</a> - my favourite beginning resource on any subject
+    				</li><li><a href="http://www.fierz.ch/strategy.htm">Martin Fierz</a> - Excellent introduction to strategy game programming</li>
+    				<li><a href="http://wilson.engr.wisc.edu/boxes/">David Wilson</a> - Compendium of dots and boxes links</li>
+    				<li><a href="http://www.amazon.co.uk/Winning-Ways-Your-Mathematical-Plays/dp/1568811438/">Winning Ways book on Amazon</a> - the seminal but readable book on mathematical games.
+    				Volume 3 has a chapter on Dots &amp; Boxes
+    				</li>
+    				<li><a href="http://www.amazon.co.uk/Dots-Boxes-Game-Sophisticated-Childs/dp/1568811292">Sophisticated Child's Play on Amazon</a> - book on dots and boxes in particular
+    				Not much new material from <cite>Winning Ways</cite> but has a large set of problems and answers
+    				</li>
+    				<li><a id="demainhern" href="http://arxiv.org/pdf/cs/0106019v2.pdf">Demaine &amp; Hern</a>'s overview of current knowledge of computational complexity
+    				of a set of games including Dots and Boxes
+    				</li>
+    				<li><a id="planargraphiso" href="http://www.emis.de/journals/JGAA/accepted/2004/KuklukHolderCook2004.8.3.pdf">Kukluk, Holder &amp; Cook</a> Experimentation
+    				of planar graph isomorphism algorithms
+    				</li></ul>
+            </aside>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svgCanvas" viewBox="0 0 500 500" preserveAspectRatio="xMidYMin">
+            	<!-- 100% invisible rect needed for firefox as width/height in firefox is dependent on the contents -->
+            	<rect x="0" y="0" width="100%" height="100%" opacity="0"></rect>
+            <line stroke="rgb(0,0,0)" stroke-width="4" visibility="hidden" visible="hidden" stroke-dasharray="14.285714285714286 14.285714285714286" x1="464.2857142857143" y1="178.57142857142858" x2="464.2857142857143" y2="35.714285714285715"></line><circle cx="35.714285714285715" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="35.714285714285715" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="9" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="35.714285714285715" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="9" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="35.714285714285715" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.111106872558594" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.061728000640869" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.277082920074463" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.138506889343262" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.111106872558594" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.061728000640869" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.277082920074463" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="178.57142857142858" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.333320140838623" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.999959945678711" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.166626930236816" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.212924003601074" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="321.42857142857144" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="35.714285714285715" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.44438648223877" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.44438648223877" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.475253105163574" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="178.57142857142858" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="7.111106872558594" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.475253105163574" to="7" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.475253105163574" to="9" fill="freeze" begin="indefinite"></animate><animate dur="0.3" attributeName="r" from="8.504404067993164" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="321.42857142857144" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle><circle cx="464.2857142857143" cy="464.2857142857143" fill="black" r="7"><animate dur="0.5" attributeName="r" from="0" to="7" fill="freeze" begin="indefinite"></animate></circle></svg>
+           	<footer>
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" id="progressBox" preserveAspectRatio="none" style="opacity: 0.2;">
+			</footer>
+            </div>
+        </div>
+
+     	<div id="scripts">
+     		<!-- Autoinserted stuff tends to go here -->
+     		<script src="https://connect.facebook.net/en_GB/all.js?hash=c8db212e61b010752a1699e70f1093c5&amp;ua=modern_es6" async="" crossorigin="anonymous"></script><script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.da.JJebDqvkik4.O/m=auth/exm=plusone/rt=j/sv=1/d=1/ed=1/am=wQ/rs=AGLTcCOhPR8-zYWmW-hcuR0U6ZACgS99Mg/cb=gapi.loaded_1" async=""></script><script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.da.JJebDqvkik4.O/m=plusone/rt=j/sv=1/d=1/ed=1/am=wQ/rs=AGLTcCOhPR8-zYWmW-hcuR0U6ZACgS99Mg/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="https://apis.google.com/js/platform.js" gapi_processed="true"></script><script id="facebook-jssdk" async="" src="//connect.facebook.net/en_GB/all.js#xfbml=1&amp;status=0&amp;appId=568165249963976"></script><script id="twitter-wjs" async="" src="http://platform.twitter.com/widgets.js"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script id="emptyfirstscript"></script>
+
+     		<!-- My scripts -->
+     		<script src="js/vectors.js"></script>
+            <script src="js/graphics.js"></script>
+   			<script src="js/manager.js"></script>
+   			<script type="text/javascript">manager.newGame();</script>
+
+   			<!-- Bugfix for iOS -->
+   			<script src="js-ext/viewport-units-buggyfill.js"></script>
+			<script>window.viewportUnitsBuggyfill.init();</script>
+
+     		<!--  Google analytics -->
+     		<script>
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+				ga('create', 'UA-11688775-2', 'auto');
+				ga('send', 'pageview');
+			</script>
+
+			<div id="social">
+	     		<!--  Twitter -->
+				<script>
+					!function(d,s,id){
+					var js,fjs=d.getElementsByTagName(s)[0],
+					p=/^http:/.test(d.location)?'http':'https';
+					if(!d.getElementById(id)){
+						js=d.createElement(s);
+						js.id=id;
+						js.async = true;
+						js.src=p+'://platform.twitter.com/widgets.js';
+						fjs.parentNode.insertBefore(js,fjs);
+					}}(document, 'script', 'twitter-wjs');
+				</script>
+
+		     	<!--  Facebook -->
+		     	<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="https://staticxx.facebook.com/connect/xd_arbiter/r/d_vbiawPdxB.js?version=44#channel=f2c305605398668&amp;origin=http%3A%2F%2Fdotsandboxes.org" style="border: none;"></iframe></div><div></div></div></div>
+				<script>
+					(function(d, s, id) {
+		  			var js, fjs = d.getElementsByTagName(s)[0];
+		  			if (d.getElementById(id)) return;
+		  			js = d.createElement(s);
+		  			js.id = id;
+		  			js.async = true;
+		  			js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&status=0&appId=568165249963976";
+		  			fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+				</script>
+
+				<!--  Gooogle -->
+				<script type="text/javascript">
+				  (function() {
+				    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				    po.src = 'https://apis.google.com/js/platform.js';
+				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+				  })();
+				</script>
+	     </div>
+     	</div>
