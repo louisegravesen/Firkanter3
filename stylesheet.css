@@ -22,15 +22,9 @@ html, body {
 
 body {
   min-height: 100vh;
-  font-family: Minecrafter, monospace;
+  font-family: monospace;
   font-size: 30px;
-  background: rgba(255,0,0,1);
-background: -moz-linear-gradient(left, rgba(255,0,0,1) 0%, rgba(255,128,0,1) 13%, rgba(255,255,0,1) 29%, rgba(0,127,0,1) 46%, rgba(0,0,255,1) 62%, rgba(179,0,255,1) 78%, rgba(216,0,220,1) 93%, rgba(216,0,220,1) 100%);
-background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,0,0,1)), color-stop(13%, rgba(255,128,0,1)), color-stop(29%, rgba(255,255,0,1)), color-stop(46%, rgba(0,127,0,1)), color-stop(62%, rgba(0,0,255,1)), color-stop(78%, rgba(179,0,255,1)), color-stop(93%, rgba(216,0,220,1)), color-stop(100%, rgba(216,0,220,1)));
-background: -webkit-linear-gradient(left, rgba(255,0,0,1) 0%, rgba(255,128,0,1) 13%, rgba(255,255,0,1) 29%, rgba(0,127,0,1) 46%, rgba(0,0,255,1) 62%, rgba(179,0,255,1) 78%, rgba(216,0,220,1) 93%, rgba(216,0,220,1) 100%);
-background: -o-linear-gradient(left, rgba(255,0,0,1) 0%, rgba(255,128,0,1) 13%, rgba(255,255,0,1) 29%, rgba(0,127,0,1) 46%, rgba(0,0,255,1) 62%, rgba(179,0,255,1) 78%, rgba(216,0,220,1) 93%, rgba(216,0,220,1) 100%);
-background: -ms-linear-gradient(left, rgba(255,0,0,1) 0%, rgba(255,128,0,1) 13%, rgba(255,255,0,1) 29%, rgba(0,127,0,1) 46%, rgba(0,0,255,1) 62%, rgba(179,0,255,1) 78%, rgba(216,0,220,1) 93%, rgba(216,0,220,1) 100%);
-background: linear-gradient(to right, rgba(255,0,0,1) 0%, rgba(255,128,0,1) 13%, rgba(255,255,0,1) 29%, rgba(0,127,0,1) 46%, rgba(0,0,255,1) 62%, rgba(179,0,255,1) 78%, rgba(216,0,220,1) 93%, rgba(216,0,220,1) 100%);
+  background-color:#C5E1FD;
 }
 
 
@@ -38,6 +32,12 @@ header h1 {
   text-align: center;
   font-size: 4em;
 }
+
+header h3 {
+  text-align: right;
+  font-size: 1em;
+}
+
 
 
 #start {
